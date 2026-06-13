@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthvora Growth — Social Media Marketing Agency</title>
+    <meta name="description" content="We help businesses build strong online presence through content strategy, branding, and performance-focused marketing.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#050505',
+                        secondary: '#0a0a0a',
+                        accent: '#84cc16',
+                        'accent-dark': '#65a30d',
+                        highlight: '#4ADE80',
+                        'text-primary': '#FFFFFF',
+                        'text-secondary': '#A3A3A3'
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #050505;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #4ADE80; border-radius: 4px; }
+        .glass {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gradient-text { color: #4ADE80; }
+        .btn-primary {
+            background: linear-gradient(135deg, #84cc16 0%, #4ADE80 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: #000;
+            font-weight: 700;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(74, 222, 128, 0.3);
+        }
+        .btn-secondary {
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            transition: all 0.3s ease;
+            color: #4ADE80;
+        }
+        .btn-secondary:hover {
+            border-color: #4ADE80;
+            background: rgba(74, 222, 128, 0.1);
+            transform: translateY(-2px);
+        }
+        .service-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(74, 222, 128, 0.1);
+            transition: all 0.4s ease;
+        }
+        .service-card:hover {
+            border-color: rgba(74, 222, 128, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(74, 222, 128, 0.1);
+        }
+        .portfolio-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(74, 222, 128, 0.1);
+            transition: all 0.4s ease;
+        }
+        .portfolio-card:hover {
+            border-color: rgba(74, 222, 128, 0.4);
+            transform: translateY(-4px);
+        }
+        .testimonial-card {
+            background: rgba(15, 15, 15, 0.8);
+            border: 1px solid rgba(74, 222, 128, 0.1);
+        }
+        .service-card.active {
+            border-color: #4ADE80;
+            background: rgba(74, 222, 128, 0.08);
+            box-shadow: 0 16px 45px rgba(74, 222, 128, 0.12);
+        }
+        .fade-in { opacity: 0; transform: translateY(30px); }
+        .img-hover { transition: transform 0.4s ease; }
+        .img-hover:hover { transform: scale(1.03); }
+        .green-glow { box-shadow: 0 0 20px rgba(74, 222, 128, 0.2); }
+        .green-line { height: 2px; background: linear-gradient(90deg, #84cc16, #4ADE80); width: 60px; }
+        .typing-text { white-space: pre-wrap; display: inline-block; }
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: #4ADE80;
+            margin-left: 0.35rem;
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
+        }
+        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+        .icon-circle {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .check-green { color: #4ADE80; }
+        .portfolio-link {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(74, 222, 128, 0.9);
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        .portfolio-card:hover .portfolio-link { opacity: 1; }
+        .portfolio-carousel {
+            position: relative;
+        }
+        .portfolio-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: min(320px, 100%);
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .portfolio-track::-webkit-scrollbar {
+            height: 10px;
+        }
+        .portfolio-track::-webkit-scrollbar-thumb {
+            background: rgba(74, 222, 128, 0.4);
+            border-radius: 999px;
+        }
+        .portfolio-slide {
+            scroll-snap-align: start;
+            min-width: 320px;
+        }
+        .service-slider {
+            overflow: hidden;
+            position: relative;
+        }
+        .service-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(280px, 320px);
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.75rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .service-track::-webkit-scrollbar {
+            height: 10px;
+        }
+        .service-track::-webkit-scrollbar-thumb {
+            background: rgba(74, 222, 128, 0.4);
+            border-radius: 999px;
+        }
+        .service-option {
+            scroll-snap-align: start;
+            min-width: 280px;
+            flex: none;
+        }
+        .carousel-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        .service-slider .carousel-nav {
+            justify-content: space-between;
+            max-width: 220px;
+            margin: 1.5rem auto 0;
+        }
+        .carousel-button {
+            width: 48px;
+            height: 48px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            background: rgba(15, 15, 15, 0.95);
+            animation: float-nav 4.5s ease-in-out infinite alternate;
+        }
+        .carousel-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(74, 222, 128, 0.16), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .carousel-button:hover::before {
+            opacity: 1;
+        }
+        .carousel-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 36px rgba(74, 222, 128, 0.2);
+            border-color: rgba(74, 222, 128, 0.4);
+        }
+        .carousel-button-left {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.22), rgba(15, 15, 15, 0.95));
+        }
+        .carousel-button-right {
+            background: linear-gradient(225deg, rgba(132, 204, 22, 0.22), rgba(15, 15, 15, 0.95));
+        }
+        .carousel-button-left:hover {
+            box-shadow: 0 18px 36px rgba(74, 222, 128, 0.28);
+        }
+        .carousel-button-right:hover {
+            box-shadow: 0 18px 36px rgba(132, 204, 22, 0.28);
+        }
+        .service-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(280px, 320px);
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 0.75rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        #service-detail {
+            margin-top: 3rem;
+        }
+        .instagram-media {
+            max-width: 360px !important;
+            min-width: 280px !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+        }
+        @keyframes float-nav {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+        .logo-slider {
+            overflow: hidden;
+        }
+        .logo-track {
+            display: inline-flex;
+            gap: 3rem;
+            align-items: center;
+            white-space: nowrap;
+            animation: slide-left 20s linear infinite;
+        }
+        .logo-track span {
+            flex: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .logo-track span:hover {
+            transform: translateY(-4px);
+            color: #4ADE80;
+        }
+        .testimonial-heading {
+            display: inline-block;
+            animation: float-title 8s ease-in-out infinite;
+        }
+        .testimonial-heading .gradient-text {
+            animation: text-glow 3s ease-in-out infinite alternate;
+        }
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 24px 40px rgba(74, 222, 128, 0.15);
+        }
+        @keyframes slide-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes float-title {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes text-glow {
+            from { text-shadow: 0 0 10px rgba(74, 222, 128, 0.2); }
+            to { text-shadow: 0 0 24px rgba(74, 222, 128, 0.6); }
+        }
+    </style>
+</head>
+<body class="bg-dark text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="flex items-center space-x-1">
+                        <svg class="w-8 h-6" viewBox="0 0 40 24" fill="none">
+                            <rect x="2" y="16" width="8" height="8" rx="1" fill="#84cc16" opacity="0.6"/>
+                            <rect x="12" y="10" width="8" height="14" rx="1" fill="#84cc16" opacity="0.8"/>
+                            <rect x="22" y="4" width="8" height="20" rx="1" fill="#4ADE80"/>
+                            <polyline points="32,12 36,6 40,2" stroke="#4ADE80" stroke-width="2" fill="none"/>
+                            <polyline points="36,6 36,2 40,2" stroke="#4ADE80" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-heading font-bold text-lg tracking-wide text-white">SYNTHVORA</span>
+                        <span class="font-heading font-semibold text-sm tracking-widest text-accent block -mt-1">GROWTH</span>
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-text-secondary hover:text-white transition-colors text-sm font-medium">About</a>
+                    <a href="#services" class="text-text-secondary hover:text-white transition-colors text-sm font-medium">Services</a>
+                    <a href="#work" class="text-text-secondary hover:text-white transition-colors text-sm font-medium">Work</a>
+                    <a href="#process" class="text-text-secondary hover:text-white transition-colors text-sm font-medium">Process</a>
+                    <a href="#contact" class="btn-primary px-6 py-2.5 rounded-full text-sm">Book a Call</a>
+                </div>
+                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-secondary border-t border-white/5">
+            <div class="px-6 py-6 space-y-6">
+                <a href="#about" class="block text-text-secondary hover:text-white" onclick="closeMobileMenu()">About</a>
+                <a href="#services" class="block text-text-secondary hover:text-white" onclick="closeMobileMenu()">Services</a>
+                <a href="#work" class="block text-text-secondary hover:text-white" onclick="closeMobileMenu()">Work</a>
+                <a href="#process" class="block text-text-secondary hover:text-white" onclick="closeMobileMenu()">Process</a>
+                <a href="#contact" class="block btn-primary px-6 py-3 rounded-full text-center text-sm" onclick="closeMobileMenu()">Book a Call</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1920&q=80" alt="Hero Background" class="w-full h-full object-cover scale-110">
+            <div class="absolute inset-0 bg-gradient-to-b from-dark/95 via-dark/85 to-dark"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-dark/80 via-dark/50 to-transparent"></div>
+        </div>
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-highlight/10 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <div class="inline-flex items-center space-x-2 bg-accent/10 border border-accent/20 px-4 py-2 rounded-full mb-8">
+                        <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                        <span class="text-sm text-text-secondary">Content. Brand. Growth. <span class="text-accent">All in sync.</span></span>
+                    </div>
+                    <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">
+                        <span id="hero-typed-heading" class="typing-text"></span><span class="typing-cursor" aria-hidden="true"></span>
+                    </h1>
+                    <p class="text-lg text-text-secondary max-w-xl mb-6 leading-relaxed">
+                        End-to-end solutions to build your brand, engage your audience & drive growth. We help brands grow smarter & faster.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-start gap-4">
+                        <a href="#contact" class="btn-primary px-8 py-4 rounded-full text-base flex items-center space-x-2 group">
+                            <span>Book a Call</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#work" class="btn-secondary px-8 py-4 rounded-full text-base flex items-center space-x-2">
+                            <span>View Work</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <div class="mt-16 flex items-center space-x-12">
+                        <div>
+                            <div class="text-3xl font-bold font-heading text-white">12+</div>
+                            <div class="text-sm text-text-secondary mt-1">Projects Delivered</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/10"></div>
+                        <div>
+                            <div class="text-3xl font-bold font-heading text-white">800K+</div>
+                            <div class="text-sm text-text-secondary mt-1">Content Reach</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/10"></div>
+                        <div>
+                            <div class="text-3xl font-bold font-heading text-white">90%</div>
+                            <div class="text-sm text-text-secondary mt-1">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By -->
+<section class="py-16 border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <p class="text-center text-text-secondary text-sm mb-10 fade-in uppercase tracking-wider">
+            Trusted by innovative brands
+        </p>
+
+        <!-- moving wrapper -->
+        <div class="logo-slider">
+            <div class="logo-track">
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    NovaWear
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Zentro
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Luxbyte
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Veltrix
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Nexora
+                </span>
+
+                <!-- duplicate for smooth loop -->
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    NovaWear
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Zentro
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Luxbyte
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Veltrix
+                </span>
+
+                <span class="text-xl font-heading font-bold text-text-secondary">
+                    Nexora
+                </span>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <!-- About -->
+    <section id="about" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <div class="inline-flex items-center gap-4 bg-white/5 border border-accent/10 rounded-3xl px-5 py-3 mb-8">
+                        <div class="w-12 h-12 rounded-3xl bg-gradient-to-br from-accent to-highlight flex items-center justify-center shadow-lg">
+                            <svg class="w-7 h-7 text-black" viewBox="0 0 40 24" fill="none">
+                                <rect x="2" y="16" width="8" height="8" rx="1" fill="#84cc16" opacity="0.6"/>
+                                <rect x="12" y="10" width="8" height="14" rx="1" fill="#84cc16" opacity="0.8"/>
+                                <rect x="22" y="4" width="8" height="20" rx="1" fill="#4ADE80"/>
+                                <polyline points="32,12 36,6 40,2" stroke="#4ADE80" stroke-width="2" fill="none"/>
+                                <polyline points="36,6 36,2 40,2" stroke="#4ADE80" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                     <div class="flex items-center gap-4">
+    
+   
+    <!-- Brand Text -->
+    <div>
+        <p class="text-sm uppercase tracking-[0.35em] text-green-400 font-medium">
+            Synthvora Growth
+        </p>
+
+        <p class="font-semibold text-white text-sm">
+            Official Brand Identity
+        </p>
+    </div>
+
+</div>
+                    </div>
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6">About <span class="gradient-text">Synthvora Growth</span></h2>
+                    <div class="green-line mb-6"></div>
+                    <p class="text-text-secondary text-lg leading-relaxed mb-6">Synthvora Growth is a social media marketing agency focused on helping startups and brands grow through clear strategy, consistent content, and performance marketing.</p>
+                    <p class="text-text-secondary text-lg leading-relaxed mb-8">We don't focus on trends only — we focus on <span class="text-white font-medium">results that matter</span>.</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-start space-x-3"><i data-lucide="check-circle" class="w-6 h-6 check-green flex-shrink-0 mt-0.5"></i><span class="text-sm text-text-secondary">Strategy-Driven Approach</span></div>
+                        <div class="flex items-start space-x-3"><i data-lucide="check-circle" class="w-6 h-6 check-green flex-shrink-0 mt-0.5"></i><span class="text-sm text-text-secondary">Creative & Data-Backed</span></div>
+                        <div class="flex items-start space-x-3"><i data-lucide="check-circle" class="w-6 h-6 check-green flex-shrink-0 mt-0.5"></i><span class="text-sm text-text-secondary">Results That Matter</span></div>
+                        <div class="flex items-start space-x-3"><i data-lucide="check-circle" class="w-6 h-6 check-green flex-shrink-0 mt-0.5"></i><span class="text-sm text-text-secondary">Transparent & Reliable</span></div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="rounded-2xl overflow-hidden mb-8 img-hover bg-white/10 border border-accent/20 p-10 flex items-center justify-center shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1494178270175-e96de2971df9?q=80&w=780&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="About Image" class="w-full h-auto object-cover">
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-6 bg-secondary rounded-xl border border-accent/10"><div class="text-4xl font-bold gradient-text mb-2">5+</div><div class="text-sm text-text-secondary">Years Experience</div></div>
+                        <div class="text-center p-6 bg-secondary rounded-xl border border-accent/10"><div class="text-4xl font-bold gradient-text mb-2">50+</div><div class="text-sm text-text-secondary">Active Clients</div></div>
+                        <div class="text-center p-6 bg-secondary rounded-xl border border-accent/10"><div class="text-4xl font-bold gradient-text mb-2">3</div><div class="text-sm text-text-secondary">Team Members</div></div>
+                        <div class="text-center p-6 bg-secondary rounded-xl border border-accent/10"><div class="text-4xl font-bold gradient-text mb-2">24/7</div><div class="text-sm text-text-secondary">Support</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-24 bg-secondary/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-sm uppercase tracking-[0.35em] text-text-secondary mb-4">Our Services</p>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4">All <span class="gradient-text">Services</span> We Offer <span class="text-accent">→</span></h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">End-to-end solutions designed to build your brand, engage your audience and drive sustainable growth.</p>
+                <div class="green-line mx-auto mt-6"></div>
+            </div>
+            <div class="service-slider mb-16 fade-in">
+                <div class="service-track">
+                    <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="content-creation">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">01</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Content Creation</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Engaging content that tells your brand story and connects with your audience.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="social-media">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">02</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Social Media Management</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">We manage your social channels to build engagement and grow your community.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="growth-strategy">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">03</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Growth Strategy & Consulting</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Data-driven strategies tailored to your brand goals for sustainable growth.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="branding">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">04</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Branding & Identity</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Build a strong, memorable brand identity that stands out in the market.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="video-production">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">05</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Video Editing & Production</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">High-quality videos that captivate, engage and convert.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="graphic-design">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">06</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Graphic Design</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Eye-catching visuals and designs that elevate your brand presence.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="paid-advertising">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">07</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Paid Advertising</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">ROI-focused ad campaigns that bring more leads, sales and visibility.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="seo">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">08</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">SEO Optimization</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">On-page, off-page & technical SEO to rank higher and get found online.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="website-design">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">09</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Website Design & Development</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Responsive, fast & modern websites that convert visitors into customers.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="email-marketing">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">10</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Email Marketing</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Personalized email campaigns that nurture leads and drive repeat business.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="influencer-marketing">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">11</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Influencer Marketing</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Collaborate with the right influencers to expand your reach and trust.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                <div class="service-card service-option rounded-2xl p-8 text-left fade-in cursor-pointer" data-service="analytics-reporting">
+                    <div class="text-4xl font-bold text-white/20 mb-4 font-heading">12</div>
+                    <h3 class="font-heading text-xl font-bold mb-3 text-white">Analytics & Reporting</h3>
+                    <p class="text-text-secondary text-sm leading-relaxed mb-6">Track performance, measure results and make smarter data-backed decisions.</p>
+                    <a href="#" class="text-accent font-semibold text-sm hover:text-highlight transition-colors">Read More →</a>
+                </div>
+                </div>
+                <div class="carousel-nav mt-6 justify-center">
+                    <button class="carousel-button carousel-button-left" onclick="scrollServices('left')" aria-label="Scroll services left">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button class="carousel-button carousel-button-right" onclick="scrollServices('right')" aria-label="Scroll services right">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="service-detail" class="max-w-4xl mx-auto bg-gradient-to-br from-white/5 to-white/[0.02] border border-accent/20 rounded-3xl p-8 md:p-12 fade-in">
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div class="md:col-span-2">
+                        <p class="text-xs uppercase tracking-[0.35em] text-accent mb-3 font-semibold">Service Details</p>
+                        <h3 id="service-detail-title" class="text-3xl md:text-4xl font-bold text-white mb-4">Content Creation</h3>
+                        <p id="service-detail-subtitle" class="text-text-secondary text-base leading-relaxed mb-6">A creative content engine for brands that need consistent storytelling and conversion-ready posts.</p>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.35em] text-text-secondary mb-2 font-semibold">Best For</p>
+                                <p id="service-detail-audience" class="text-text-secondary text-sm">Perfect for fast-moving brands that want an engaging editorial calendar and social assets.</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.35em] text-text-secondary mb-2 font-semibold">Delivery & Timeline</p>
+                                <p id="service-detail-delivery" class="text-text-secondary text-sm">Includes 12 custom social posts, reels concepts, captions, and performance review every month.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-dark/70 rounded-2xl p-6 border border-accent/10 text-center">
+                        <p class="text-xs uppercase tracking-[0.35em] text-text-secondary mb-3 font-semibold">Get More Info</p>
+                        <h4 id="service-detail-plan" class="text-lg text-white mb-6 font-semibold">Content Creation</h4>
+                        <a href="https://wa.me/923173025339" target="_blank" class="btn-primary w-full py-3 rounded-full text-sm font-semibold inline-flex items-center justify-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4"></i>
+                            Get Started
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-xs uppercase tracking-[0.35em] text-accent mb-4 font-semibold">What's Included</p>
+                    <ul id="service-detail-features" class="grid md:grid-cols-2 gap-4">
+                        <li class="flex items-center gap-2 text-text-secondary text-sm"><span class="text-accent font-bold">•</span><span>Creative content strategy</span></li>
+                        <li class="flex items-center gap-2 text-text-secondary text-sm"><span class="text-accent font-bold">•</span><span>Monthly content calendar</span></li>
+                        <li class="flex items-center gap-2 text-text-secondary text-sm"><span class="text-accent font-bold">•</span><span>Reels + carousel design</span></li>
+                        <li class="flex items-center gap-2 text-text-secondary text-sm"><span class="text-accent font-bold">•</span><span>Performance optimization</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Work Section -->
+    <section id="work" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4">Featured <span class="gradient-text">Work</span></h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">Real results from real partnerships</p>
+                <p class="text-text-secondary text-sm max-w-2xl mx-auto mt-3">Swipe left or right to explore 10 premium case studies.</p>
+                <div class="green-line mx-auto mt-4"></div>
+            </div>
+            <div class="portfolio-carousel fade-in">
+                <div class="portfolio-track pb-4">
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80" alt="Luxury launch campaign" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Luxury Brand</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Aurora Collective</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A launch campaign for a luxury lifestyle brand, blending premium storytelling with conversion-first landing pages.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=900&q=80" alt="Enterprise redesign" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">SaaS Redesign</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Nebula Labs</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A premium enterprise redesign focused on speed, visual clarity and product storytelling.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80" alt="Campaign creative" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Campaign</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Lunar Studios</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A curated campaign suite for a premium brand, delivered with elevated visuals and social-first creative.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=80" alt="Brand system" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Brand System</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Violet House</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A complete identity system for a premium startup, from logo and palette to digital launch materials.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80" alt="Digital experience" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Digital</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Rift Agency</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A high-end digital experience for an agency, blending minimal design with strategic storytelling.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1531497865144-0460007e1481?w=900&q=80" alt="Ad campaign" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Ads</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Catalyst Media</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A conversion-focused ad campaign, with creative assets and optimization across social channels.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1533867612108-1355c12e7661?w=900&q=80" alt="UX design" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">UX</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Nexro UX</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A UX-led redesign for a software product, simplifying conversion paths without losing premium polish.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1497366529667-df8a2e5b8e9c?w=900&q=80" alt="Email campaign" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Email</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Pulse Mail</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">An email launch system for a premium product, crafted to convert subscribers into customers.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&q=80" alt="Data-driven creative" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Analytics</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Orion Metrics</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A data-driven dashboard launch supporting brand decisions and paid campaign performance.</p>
+                        </div>
+                    </article>
+                    <article class="portfolio-card portfolio-slide rounded-2xl overflow-hidden">
+                        <div class="h-64 relative overflow-hidden bg-gradient-to-br from-slate-900/70 to-slate-800/90">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900&q=80" alt="High-end studio work" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-accent/90 text-black text-xs px-3 py-1 rounded-full font-semibold">Studio</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-heading text-lg font-bold mb-2">Vela Studio</h3>
+                            <p class="text-text-secondary text-sm leading-relaxed">A premium branding suite for a design studio, with visuals that feel cinematic and modern.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="carousel-nav">
+                    <button class="carousel-button" onclick="scrollPortfolio('left')" aria-label="Scroll left">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button class="carousel-button" onclick="scrollPortfolio('right')" aria-label="Scroll right">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-24 bg-secondary/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold mb-8">Why <span class="gradient-text">Choose Us</span></h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="icon-circle flex-shrink-0"><i data-lucide="brain" class="w-6 h-6 text-accent"></i></div>
+                            <div><h3 class="font-heading text-lg font-bold mb-1">Strategy-first approach</h3><p class="text-text-secondary text-sm">Every action is backed by data and clear objectives.</p></div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="icon-circle flex-shrink-0"><i data-lucide="target" class="w-6 h-6 text-accent"></i></div>
+                            <div><h3 class="font-heading text-lg font-bold mb-1">Focus on real business growth</h3><p class="text-text-secondary text-sm">We measure success by your ROI, not vanity metrics.</p></div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="icon-circle flex-shrink-0"><i data-lucide="sparkles" class="w-6 h-6 text-accent"></i></div>
+                            <div><h3 class="font-heading text-lg font-bold mb-1">Clean, modern creative direction</h3><p class="text-text-secondary text-sm">Professional visuals that elevate your brand.</p></div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="icon-circle flex-shrink-0"><i data-lucide="zap" class="w-6 h-6 text-accent"></i></div>
+                            <div><h3 class="font-heading text-lg font-bold mb-1">Fast delivery</h3><p class="text-text-secondary text-sm">Quick turnaround without compromising quality.</p></div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="icon-circle flex-shrink-0"><i data-lucide="message-circle" class="w-6 h-6 text-accent"></i></div>
+                            <div><h3 class="font-heading text-lg font-bold mb-1">Clear communication</h3><p class="text-text-secondary text-sm">Regular updates and transparent reporting.</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="rounded-2xl overflow-hidden mb-8 img-hover">
+                        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80" alt="Strategy" class="w-full h-auto opacity-80">
+                    </div>
+                    <div class="bg-secondary rounded-2xl p-8 border border-accent/10">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl"><span class="text-sm text-text-secondary">Client Retention</span><span class="text-lg font-bold gradient-text">95%</span></div>
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl"><span class="text-sm text-text-secondary">Avg. Growth Rate</span><span class="text-lg font-bold gradient-text">+250%</span></div>
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl"><span class="text-sm text-text-secondary">Response Time</span><span class="text-lg font-bold gradient-text">&lt; 2 hrs</span></div>
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-xl"><span class="text-sm text-text-secondary">Projects Completed</span><span class="text-lg font-bold gradient-text">150+</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4">Our <span class="gradient-text">Process</span></h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">How we work with you from start to success</p>
+                <div class="green-line mx-auto mt-4"></div>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="relative fade-in">
+                    <div class="service-card rounded-2xl p-8 text-center h-full">
+                        <div class="icon-circle mx-auto mb-6"><i data-lucide="target" class="w-8 h-8 text-accent"></i></div>
+                        <h3 class="font-heading text-xl font-bold mb-3">Understand</h3>
+                        <p class="text-text-secondary text-sm">We analyze your brand and goals.</p>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 z-10"><i data-lucide="arrow-right" class="w-6 h-6 process-arrow"></i></div>
+                </div>
+                <div class="relative fade-in">
+                    <div class="service-card rounded-2xl p-8 text-center h-full">
+                        <div class="icon-circle mx-auto mb-6"><i data-lucide="lightbulb" class="w-8 h-8 text-accent"></i></div>
+                        <h3 class="font-heading text-xl font-bold mb-3">Plan & Strategy</h3>
+                        <p class="text-text-secondary text-sm">We create a clear growth strategy.</p>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 z-10"><i data-lucide="arrow-right" class="w-6 h-6 process-arrow"></i></div>
+                </div>
+                <div class="relative fade-in">
+                    <div class="service-card rounded-2xl p-8 text-center h-full">
+                        <div class="icon-circle mx-auto mb-6"><i data-lucide="settings" class="w-8 h-8 text-accent"></i></div>
+                        <h3 class="font-heading text-xl font-bold mb-3">Execute & Create</h3>
+                        <p class="text-text-secondary text-sm">We design content and campaigns.</p>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2 z-10"><i data-lucide="arrow-right" class="w-6 h-6 process-arrow"></i></div>
+                </div>
+                <div class="fade-in">
+                    <div class="service-card rounded-2xl p-8 text-center h-full">
+                        <div class="icon-circle mx-auto mb-6"><i data-lucide="bar-chart-3" class="w-8 h-8 text-accent"></i></div>
+                        <h3 class="font-heading text-xl font-bold mb-3">Optimize & Grow</h3>
+                        <p class="text-text-secondary text-sm">We improve performance over time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Testimonials -->
+<section class="py-24 bg-secondary/50">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+        <div class="text-center mb-16 fade-in">
+            <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4 testimonial-heading">
+                Client <span class="gradient-text">Feedback</span>
+            </h2>
+            <div class="green-line mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <!-- 1 USA -->
+            <div class="testimonial-card rounded-2xl p-8 fade-in">
+                <div class="flex space-x-1 mb-6">
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                </div>
+                <p class="text-text-secondary text-sm mb-6">
+                    "Our website traffic increased significantly after launch. Great work!"
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80">
+                    </div>
+                    <div>
+                        <div class="font-semibold text-sm">Michael Johnson</div>
+                        <div class="text-xs text-text-secondary">USA - Business Owner</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 Canada -->
+            <div class="testimonial-card rounded-2xl p-8 fade-in">
+                <div class="flex space-x-1 mb-6">
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                </div>
+                <p class="text-text-secondary text-sm mb-6">
+                    "Professional design and smooth communication throughout the project."
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80">
+                    </div>
+                    <div>
+                        <div class="font-semibold text-sm">Emily Carter</div>
+                        <div class="text-xs text-text-secondary">Canada - Startup Founder</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 USA -->
+            <div class="testimonial-card rounded-2xl p-8 fade-in">
+                <div class="flex space-x-1 mb-6">
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                </div>
+                <p class="text-text-secondary text-sm mb-6">
+                    "Amazing branding work, our social presence improved a lot."
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&q=80">
+                    </div>
+                    <div>
+                        <div class="font-semibold text-sm">David Smith</div>
+                        <div class="text-xs text-text-secondary">USA - E-commerce Owner</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Canada -->
+            <div class="testimonial-card rounded-2xl p-8 fade-in">
+                <div class="flex space-x-1 mb-6">
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                </div>
+                <p class="text-text-secondary text-sm mb-6">
+                    "Clean UI and modern look. Our customers love the new website."
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80">
+                    </div>
+                    <div>
+                        <div class="font-semibold text-sm">Olivia Brown</div>
+                        <div class="text-xs text-text-secondary">Canada - Restaurant Owner</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 USA -->
+            <div class="testimonial-card rounded-2xl p-8 fade-in">
+                <div class="flex space-x-1 mb-6">
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                </div>
+                <p class="text-text-secondary text-sm mb-6">
+                    "Very responsive team, everything delivered on time."
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&q=80">
+                    </div>
+                    <div>
+                        <div class="font-semibold text-sm">James Wilson</div>
+                        <div class="text-xs text-text-secondary">USA - Tech Startup</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 Canada -->
+            <div class="testimonial-card rounded-2xl p-8 fade-in">
+                <div class="flex space-x-1 mb-6">
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-accent fill-accent"></i>
+                </div>
+                <p class="text-text-secondary text-sm mb-6">
+                    "Great support and excellent design quality. Highly recommended!"
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=100&q=80">
+                    </div>
+                    <div>
+                        <div class="font-semibold text-sm">Sophia Miller</div>
+                        <div class="text-xs text-text-secondary">Canada - Online Brand Owner</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- Instagram -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-4">Latest <span class="gradient-text">Instagram Posts</span></h2>
+                <p class="text-text-secondary text-lg max-w-2xl mx-auto">See the newest work and campaign highlights from @sythvoragrowth.</p>
+                <div class="green-line mx-auto mt-4"></div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZJv7Gmop8l/" data-instgrm-version="14" style="background:#000; border:0; margin:0 auto; max-width:360px; min-width:280px; width:100%;"></blockquote>
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZJv38oojYk/" data-instgrm-version="14" style="background:#000; border:0; margin:0 auto; max-width:360px; min-width:280px; width:100%;"></blockquote>
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZJpyKuIHAt/" data-instgrm-version="14" style="background:#000; border:0; margin:0 auto; max-width:360px; min-width:280px; width:100%;"></blockquote>
+            </div>
+            <div class="text-center fade-in">
+                <a href="https://www.instagram.com/synthvoragrowth/" target="_blank" class="btn-secondary inline-flex items-center space-x-2 px-8 py-4 rounded-full text-base font-semibold">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                    <span>Follow @sythvoragrowth</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="bg-secondary rounded-3xl p-12 md:p-16 border border-accent/10 text-center fade-in relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10"><img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&q=60" alt="BG" class="w-full h-full object-cover"></div>
+                <div class="relative z-10">
+                    <div class="inline-flex items-center justify-center gap-4 mb-8 px-6 py-4 rounded-full bg-white/5 border border-white/10 mx-auto max-w-md">
+                        <div class="w-12 h-12 rounded-3xl bg-accent grid place-items-center text-black font-bold">S</div>
+                        <div class="text-left">
+                            <p class="text-xs uppercase tracking-[0.35em] text-text-secondary">Brand identity</p>
+                            <p class="font-semibold text-lg">Synthvora Growth</p>
+                        </div>
+                    </div>
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6">Let's build your brand <span class="gradient-text">properly</span></h2>
+                    <p class="text-text-secondary text-lg mb-10 max-w-2xl mx-auto">Ready to grow your brand with strategic social media marketing? Let's talk.</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+                        <a href="https://wa.me/923173025339" target="_blank" class="btn-primary px-8 py-4 rounded-full text-base flex items-center space-x-2 group">
+                            <span>WhatsApp +92 317 3025339</span>
+                            <i data-lucide="phone" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="mailto:hello@synthvora.com" class="btn-secondary px-8 py-4 rounded-full text-base flex items-center space-x-2">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            <span>Email Us</span>
+                        </a>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-text-secondary text-sm">
+                        <a href="mailto:hello@synthvora.com" class="flex items-center space-x-2 hover:text-white transition-colors"><i data-lucide="mail" class="w-4 h-4"></i><span>SYNTHVORAGROWTH@GMAIL.COM</span></a>
+                        <span class="hidden sm:block w-1 h-1 rounded-full bg-text-secondary"></span>
+                        <a href="https://www.instagram.com/synthvoragrowth/" target="_blank" class="flex items-center space-x-2 hover:text-white transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i><span>@sythvoragrowth</span></a>
+                    </div>
+                    <div class="flex items-center justify-center gap-4 mt-6">
+                        <a href="https://www.facebook.com/synthvoragrowth" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent/20 transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="https://www.linkedin.com/company/synthvora-growth" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent/20 transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="https://instagram.com/sythvoragrowth" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent/20 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <svg class="w-8 h-6" viewBox="0 0 40 24" fill="none">
+                            <rect x="2" y="16" width="8" height="8" rx="1" fill="#84cc16" opacity="0.6"/>
+                            <rect x="12" y="10" width="8" height="14" rx="1" fill="#84cc16" opacity="0.8"/>
+                            <rect x="22" y="4" width="8" height="20" rx="1" fill="#4ADE80"/>
+                            <polyline points="32,12 36,6 40,2" stroke="#4ADE80" stroke-width="2" fill="none"/>
+                            <polyline points="36,6 36,2 40,2" stroke="#4ADE80" stroke-width="2" fill="none"/>
+                        </svg>
+                        <div>
+                            <span class="font-heading font-bold text-lg text-white">SYNTHVORA</span>
+                            <span class="font-heading font-semibold text-xs tracking-widest text-accent block -mt-1">GROWTH</span>
+                        </div>
+                    </div>
+                    <p class="text-text-secondary text-sm">Content. Brand. Growth. All in sync.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-text-secondary">
+                        <li><a href="#services" class="hover:text-white transition-colors">Social Media</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Branding</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Content Creation</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Paid Ads</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-text-secondary">
+                        <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="#work" class="hover:text-white transition-colors">Portfolio</a></li>
+                        <li><a href="#process" class="hover:text-white transition-colors">Process</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/synthvoragrowth/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent/20 transition-colors" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/synthvoragrowth/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent/20 transition-colors" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37a4 4 0 1 1-7.94 1.81" />
+                                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/synthvoragrowth/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-accent/20 transition-colors" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2h-1v9h-4v-9H8v9H4v-9a6 6 0 0 1 6-6h6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center">
+                <p class="text-text-secondary text-sm">© 2026 Synthvora Growth. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('hidden'); }
+        function closeMobileMenu() { document.getElementById('mobileMenu').classList.add('hidden'); }
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.fade-in').forEach((el, i) => {
+            gsap.fromTo(el, { opacity: 0, y: 30 }, {
+                opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+                delay: (i % 3) * 0.1,
+                scrollTrigger: { trigger: el, start: 'top 85%' }
+            });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        function scrollPortfolio(direction) {
+            const track = document.querySelector('.portfolio-track');
+            if (!track) return;
+            const distance = track.clientWidth * 0.7;
+            track.scrollBy({ left: direction === 'left' ? -distance : distance, behavior: 'smooth' });
+        }
+        function scrollServices(direction) {
+            const track = document.querySelector('.service-track');
+            if (!track) return;
+            const distance = track.clientWidth * 0.75;
+            track.scrollBy({ left: direction === 'left' ? -distance : distance, behavior: 'smooth' });
+        }
+        const serviceOptions = document.querySelectorAll('.service-option');
+        const serviceDetailTitle = document.getElementById('service-detail-title');
+        const serviceDetailSubtitle = document.getElementById('service-detail-subtitle');
+        const serviceDetailPrice = document.getElementById('service-detail-price');
+        const serviceDetailPlan = document.getElementById('service-detail-plan');
+        const serviceDetailFeatures = document.getElementById('service-detail-features');
+        const serviceDetailAudience = document.getElementById('service-detail-audience');
+        const serviceDetailDelivery = document.getElementById('service-detail-delivery');
+        const serviceDetails = {
+            'content-creation': {
+                title: 'Content Creation',
+                price: '$1.5k/mo',
+                plan: 'Starter',
+                subtitle: 'A creative content engine for brands that need consistent storytelling and conversion-ready posts.',
+                audience: 'Perfect for fast-moving brands that want an engaging editorial calendar and social assets.',
+                delivery: 'Includes 12 custom social posts, reels concepts, captions, and performance review every month.',
+                features: ['Creative content strategy', 'Monthly content calendar', 'Reels + carousel design', 'Performance optimization']
+            },
+            'social-media': {
+                title: 'Social Media Management',
+                price: '$2.2k/mo',
+                plan: 'Growth',
+                subtitle: 'A managed social program that grows audience, engagement and campaign performance.',
+                audience: 'Ideal for businesses that want consistent publishing, community management and growth tracking.',
+                delivery: 'Includes 4 channels, daily posting, audience replies, and weekly optimization reports.',
+                features: ['Channel management', 'Engagement strategy', 'Ad support coordination', 'Weekly performance reports']
+            },
+            'growth-strategy': {
+                title: 'Growth Strategy & Consulting',
+                price: '$3.2k/mo',
+                plan: 'Business',
+                subtitle: 'A high-level growth roadmap designed to unlock new audiences, campaigns, and revenue streams.',
+                audience: 'Best for brands ready to invest in long-term positioning and measurable growth systems.',
+                delivery: 'Includes competitive research, positioning, channel strategy, and quarterly growth planning.',
+                features: ['Brand and channel audit', 'Growth roadmap', 'Campaign frameworks', 'Quarterly performance reviews']
+            },
+            'branding': {
+                title: 'Branding & Identity',
+                price: '$2.8k/mo',
+                plan: 'Growth',
+                subtitle: 'A premium identity system that makes your brand look polished, modern, and memorable.',
+                audience: 'Great for businesses that need a stronger visual identity and cohesive brand experience.',
+                delivery: 'Includes logo system, brand guidelines, color palette and design assets for digital channels.',
+                features: ['Logo and visual system', 'Brand positioning', 'Typography + color palette', 'Marketing asset templates']
+            },
+            'video-production': {
+                title: 'Video Editing & Production',
+                price: '$3.4k/mo',
+                plan: 'Business',
+                subtitle: 'High-impact video content made for social, ads and landing pages to improve conversions.',
+                audience: 'Perfect for brands that want premium motion content, storytelling, and ad-ready video assets.',
+                delivery: 'Includes concept, shooting support, editing, and distribution-ready cuts for social.',
+                features: ['Video concept & scripting', 'Professional editing', 'Ad-ready cutdowns', 'Motion graphics accents']
+            },
+            'graphic-design': {
+                title: 'Graphic Design',
+                price: '$1.4k/mo',
+                plan: 'Starter',
+                subtitle: 'Modern visual design that makes every campaign and brand touchpoint feel premium.',
+                audience: 'Ideal for businesses that need polished visuals across social, ads and marketing assets.',
+                delivery: 'Includes design templates, social tiles, brand collateral and asset production.',
+                features: ['Social post design', 'Campaign visuals', 'Brand collateral', 'Template assets']
+            },
+            'paid-advertising': {
+                title: 'Paid Advertising',
+                price: '$2.6k/mo',
+                plan: 'Growth',
+                subtitle: 'ROI-focused ad campaigns built to scale visibility, leads and conversions.',
+                audience: 'Great for brands ready to invest in paid growth with smart targeting and optimization.',
+                delivery: 'Includes campaign setup, creative testing, bid optimization and weekly reporting.',
+                features: ['Ad strategy', 'Creative testing', 'Campaign optimization', 'Weekly reports']
+            },
+            'seo': {
+                title: 'SEO Optimization',
+                price: '$2.5k/mo',
+                plan: 'Growth',
+                subtitle: 'Search visibility work that helps your site rank higher and capture qualified traffic.',
+                audience: 'Perfect for businesses looking to improve search presence and organic performance.',
+                delivery: 'Includes site audit, content optimization, technical fixes and monthly progress tracking.',
+                features: ['SEO audit', 'On-page optimization', 'Technical fixes', 'Ranking reporting']
+            },
+            'website-design': {
+                title: 'Website Design & Development',
+                price: '$4.2k/mo',
+                plan: 'Business',
+                subtitle: 'A high-performance website experience built for premium brands and conversions.',
+                audience: 'Best for brands that need a fully designed digital presence with conversion-first UX.',
+                delivery: 'Includes responsive design, performance optimization, CMS setup and launch support.',
+                features: ['Responsive UX design', 'Conversion-focused pages', 'Performance tuning', 'Launch support']
+            },
+            'email-marketing': {
+                title: 'Email Marketing',
+                price: '$1.5k/mo',
+                plan: 'Starter',
+                subtitle: 'Automated email campaigns that nurture leads and keep your audience engaged.',
+                audience: 'Ideal for brands that want predictable follow-up and retention through email.',
+                delivery: 'Includes campaign workflows, copywriting, design and reporting.',
+                features: ['Email workflows', 'Copy + design', 'Campaign automation', 'Performance tracking']
+            },
+            'influencer-marketing': {
+                title: 'Influencer Marketing',
+                price: '$2.2k/mo',
+                plan: 'Growth',
+                subtitle: 'Influencer campaigns that build trust, awareness and brand momentum.',
+                audience: 'Great for brands that want authentic reach through partnership campaigns.',
+                delivery: 'Includes influencer sourcing, campaign management and content collaboration.',
+                features: ['Influencer sourcing', 'Campaign coordination', 'Content collaboration', 'Performance tracking']
+            },
+            'analytics-reporting': {
+                title: 'Analytics & Reporting',
+                price: '$1.8k/mo',
+                plan: 'Starter',
+                subtitle: 'Clear performance reporting so you see exactly what is working and what to improve.',
+                audience: 'Perfect for brands that want data-led decision making and campaign clarity.',
+                delivery: 'Includes dashboard setup, campaign reports and optimization recommendations.',
+                features: ['Dashboard reporting', 'KPI tracking', 'Campaign insights', 'Optimization guidance']
+            }
+        };
+        function updateServiceDetail(detail) {
+            if (!detail) return;
+            if (serviceDetailTitle) serviceDetailTitle.textContent = detail.title;
+            if (serviceDetailSubtitle) serviceDetailSubtitle.textContent = detail.subtitle;
+            if (serviceDetailPrice) serviceDetailPrice.textContent = detail.price;
+            if (serviceDetailPlan) serviceDetailPlan.textContent = `${detail.plan} package — premium service strategy`;
+            if (serviceDetailAudience) serviceDetailAudience.textContent = detail.audience;
+            if (serviceDetailDelivery) serviceDetailDelivery.textContent = detail.delivery;
+            if (serviceDetailFeatures) {
+                serviceDetailFeatures.innerHTML = detail.features.map(item => `<li class="flex items-center gap-2"><span class="text-accent">•</span><span>${item}</span></li>`).join('');
+            }
+        }
+        serviceOptions.forEach(card => {
+            card.addEventListener('click', () => {
+                serviceOptions.forEach(el => el.classList.remove('active'));
+                card.classList.add('active');
+                card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                const serviceId = card.dataset.service;
+                const detail = serviceDetails[serviceId];
+                updateServiceDetail(detail);
+            });
+        });
+        function animateHeroHeading() {
+            const typedHeading = document.getElementById('hero-typed-heading');
+            const words = [
+                { text: 'Grow', gradient: false },
+                { text: 'Your', gradient: false },
+                { text: 'Brand', gradient: false },
+                { text: 'With', gradient: false },
+                { text: 'Strategic', gradient: true },
+                { text: 'Social', gradient: false },
+                { text: 'Media', gradient: false },
+                { text: 'Marketing', gradient: false }
+            ];
+            if (!typedHeading) return;
+            let wordIndex = 0;
+            let charIndex = 0;
+            const cursor = document.querySelector('.typing-cursor');
+            function renderText() {
+                const currentWord = words[wordIndex];
+                const previous = words.slice(0, wordIndex).map(w => w.gradient ? `<span class="gradient-text">${w.text}</span>` : w.text).join(' ');
+                const separator = previous ? ' ' : '';
+                const partial = currentWord.gradient
+                    ? `<span class="gradient-text">${currentWord.text.slice(0, charIndex)}</span>`
+                    : currentWord.text.slice(0, charIndex);
+                typedHeading.innerHTML = previous + separator + partial;
+            }
+            function finishTyping() {
+                typedHeading.innerHTML = words.map(w => w.gradient ? `<span class="gradient-text">${w.text}</span>` : w.text).join(' ');
+                if (cursor) {
+                    cursor.style.opacity = '0';
+                    cursor.style.animation = 'none';
+                }
+            }
+            function typeNextChar() {
+                const currentWord = words[wordIndex];
+                if (charIndex <= currentWord.text.length) {
+                    renderText();
+                    charIndex += 1;
+                    if (charIndex <= currentWord.text.length) {
+                        setTimeout(typeNextChar, 80);
+                        return;
+                    }
+                }
+                wordIndex += 1;
+                if (wordIndex < words.length) {
+                    charIndex = 0;
+                    setTimeout(typeNextChar, 250);
+                } else {
+                    finishTyping();
+                }
+            }
+            typeNextChar();
+        }
+        window.addEventListener('load', () => {
+            animateHeroHeading();
+            updateServiceDetail(serviceDetails['content-creation']);
+            if (window.instgrm) {
+                window.instgrm.Embeds.process();
+            }
+        });
+        window.addEventListener('scroll', () => {
+            document.querySelector('nav').classList.toggle('bg-dark/90', window.scrollY > 50);
+        });
+    </script>
+    <script async defer src="https://www.instagram.com/embed.js"></script>
+</body>
+</html>
+
